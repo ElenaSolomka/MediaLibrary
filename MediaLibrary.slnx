@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="BooksService/BooksService.csproj" />
+  <Project Path="MoviesService/MoviesService.csproj" />
+  <Project Path="WebApp/WebApp.csproj" />
+</Solution>

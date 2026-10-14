@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Создать пользователя";
+    var roles = ViewBag.Roles as WebApp.Models.UserRole[];
+}
+
+<h2>Создать пользователя</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<form method="post" asp-action="CreateUser">
+    <div class="mb-3">
+        <label class="form-label">Логин</label>
+        <input type="text" name="login" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Пароль</label>
+        <input type="password" name="password" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Роль</label>
+        <select name="role" class="form-select">
+            @foreach (var role in roles)
+            {
+                <option value="@role">@role</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Создать</button>
+    <a asp-action="Users" class="btn btn-secondary">Отмена</a>
+</form>

@@ -1,0 +1,42 @@
+@{
+    ViewData["Title"] = "Главная";
+    var movies = ViewBag.Movies as List<WebApp.Models.Movie> ?? new List<WebApp.Models.Movie>();
+    var books = ViewBag.Books as List<WebApp.Models.Book> ?? new List<WebApp.Models.Book>();
+}
+
+<h2>Фильмы</h2>
+<div class="row mb-5">
+    @foreach (var movie in movies)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                @if (!string.IsNullOrEmpty(movie.ImageUrl))
+                {
+                    <img src="@movie.ImageUrl" class="card-img-top" alt="@movie.Title" style="height: 300px; object-fit: cover;" />
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@movie.Title</h5>
+                    <p class="card-text">@movie.Year</p>
+                    <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<h2>Книги</h2>
+<div class="row">
+    @foreach (var book in books)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@book.Title</h5>
+                    <p class="card-text">@book.Year | @book.Publisher</p>
+                    <p class="card-text">@book.Annotation</p>
+                    <a asp-controller="Books" asp-action="Details" asp-route-id="@book.Id" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

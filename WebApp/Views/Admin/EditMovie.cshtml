@@ -1,0 +1,44 @@
+@model WebApp.Models.MovieCreateModel
+@{
+    ViewData["Title"] = "Редактировать фильм";
+}
+
+<h2>Редактировать фильм</h2>
+
+<form method="post" asp-action="EditMovie" asp-route-id="@ViewBag.MovieId">
+    <div class="mb-3">
+        <label class="form-label">Название</label>
+        <input type="text" asp-for="Title" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Год</label>
+        <input type="number" asp-for="Year" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Режиссер</label>
+        <input type="text" asp-for="Director" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Производственная компания</label>
+        <input type="text" asp-for="ProductionCompany" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Главные актеры (через запятую)</label>
+        <input type="text" asp-for="MainActors" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Описание</label>
+        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">URL постера</label>
+        <input type="url" asp-for="ImageUrl" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">ID связанных книг (через запятую)</label>
+        <input type="text" asp-for="RelatedBookIdsString" class="form-control" placeholder="1,2,3" />
+        <small class="form-text">Введите ID книг через запятую</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a asp-action="Movies" class="btn btn-secondary">Отмена</a>
+</form>

@@ -1,0 +1,37 @@
+@{
+    ViewData["Title"] = "Книга";
+    var book = ViewBag.Book as WebApp.Models.Book;
+    var relatedMovies = ViewBag.RelatedMovies as List<WebApp.Models.Movie> ?? new List<WebApp.Models.Movie>();
+}
+
+<h2>@book?.Title</h2>
+<p><strong>Год:</strong> @book?.Year</p>
+<p><strong>Издательство:</strong> @book?.Publisher</p>
+<p><strong>Количество страниц:</strong> @book?.PageCount</p>
+<p><strong>Аннотация:</strong> @book?.Annotation</p>
+
+@if (relatedMovies.Any())
+{
+    <hr />
+    <h3>Связанные фильмы</h3>
+    <div class="row">
+        @foreach (var movie in relatedMovies)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    @if (!string.IsNullOrEmpty(movie.ImageUrl))
+                    {
+                        <img src="@movie.ImageUrl" class="card-img-top" alt="@movie.Title" style="height: 200px; object-fit: cover;" />
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@movie.Title</h5>
+                        <p class="card-text">@movie.Year | @movie.Director</p>
+                        <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id" class="btn btn-sm btn-primary">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-secondary mt-3">Назад к списку</a>

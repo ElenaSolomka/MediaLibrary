@@ -1,0 +1,36 @@
+@model WebApp.Models.BookCreateModel
+@{
+    ViewData["Title"] = "Редактировать книгу";
+}
+
+<h2>Редактировать книгу</h2>
+
+<form method="post" asp-action="EditBook" asp-route-id="@ViewBag.BookId">
+    <div class="mb-3">
+        <label class="form-label">Название</label>
+        <input type="text" asp-for="Title" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Год</label>
+        <input type="number" asp-for="Year" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Издательство</label>
+        <input type="text" asp-for="Publisher" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Количество страниц</label>
+        <input type="number" asp-for="PageCount" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Аннотация</label>
+        <textarea asp-for="Annotation" class="form-control" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">ID связанных фильмов (через запятую)</label>
+        <input type="text" asp-for="RelatedMovieIdsString" class="form-control" placeholder="1,2,3" />
+        <small class="form-text">Введите ID фильмов через запятую</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a asp-action="Books" class="btn btn-secondary">Отмена</a>
+</form>

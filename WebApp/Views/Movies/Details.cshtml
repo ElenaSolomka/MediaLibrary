@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Фильм";
+    var movie = ViewBag.Movie as WebApp.Models.Movie;
+    var relatedBooks = ViewBag.RelatedBooks as List<WebApp.Models.Book> ?? new List<WebApp.Models.Book>();
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @if (!string.IsNullOrEmpty(movie?.ImageUrl))
+        {
+            <img src="@movie.ImageUrl" alt="@movie.Title" class="img-fluid" />
+        }
+    </div>
+    <div class="col-md-8">
+        <h2>@movie?.Title</h2>
+        <p><strong>Год:</strong> @movie?.Year</p>
+        <p><strong>Режиссер:</strong> @movie?.Director</p>
+        <p><strong>Производственная компания:</strong> @movie?.ProductionCompany</p>
+        <p><strong>Главные актеры:</strong> @movie?.MainActors</p>
+        <p><strong>Описание:</strong> @movie?.Description</p>
+    </div>
+</div>
+
+@if (relatedBooks.Any())
+{
+    <hr />
+    <h3>Связанные книги</h3>
+    <div class="row">
+        @foreach (var book in relatedBooks)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@book.Title</h5>
+                        <p class="card-text">@book.Year | @book.Publisher</p>
+                        <a asp-controller="Books" asp-action="Details" asp-route-id="@book.Id" class="btn btn-sm btn-primary">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-secondary mt-3">Назад к списку</a>
